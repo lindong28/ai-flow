@@ -1,0 +1,10 @@
+data_produce:
+  job_type: flink
+  properties:
+    run_mode: cluster
+    flink_run_args:
+      - "-m"
+      - "sessioncluster-ae267d17-287d-43ea-a375-eed288250d09-jobmanager.vvp:8081"
+    flink_stop_args:
+      - "-m"
+      - "sessioncluster-ae267d17-287d-43ea-a375-eed288250d09-jobmanager.vvp:8081"
