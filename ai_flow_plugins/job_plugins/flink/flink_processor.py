@@ -17,7 +17,6 @@
 from abc import abstractmethod
 from typing import List, Dict, Text, Optional, Union
 
-from pyflink.dataset import ExecutionEnvironment
 from pyflink.table import TableEnvironment, Table
 from pyflink.table.udf import UserDefinedScalarFunctionWrapper
 
@@ -37,13 +36,11 @@ class ExecutionContext(json_utils.Jsonable):
     def __init__(self,
                  job_execution_info: JobExecutionInfo,
                  config: Dict,
-                 execution_env: ExecutionEnvironment,
                  table_env: WrappedTableEnvironment,
                  statement_set: WrappedStatementSet
                  ):
         self._job_execution_info = job_execution_info
         self._config: Dict = config
-        self._execution_env = execution_env
         self._table_env = table_env
         self._statement_set = statement_set
 
@@ -62,10 +59,6 @@ class ExecutionContext(json_utils.Jsonable):
     @property
     def config(self) -> Dict:
         return self._config
-
-    @property
-    def execution_env(self) -> ExecutionEnvironment:
-        return self._execution_env
 
     @property
     def table_env(self) -> WrappedTableEnvironment:

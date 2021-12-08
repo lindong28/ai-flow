@@ -36,14 +36,13 @@ from ai_flow_plugins.job_plugins.flink.flink_env import FlinkEnv
 def flink_execute_func(run_graph: RunGraph, job_execution_info: JobExecutionInfo, flink_env: FlinkEnv):
     processors: List[FlinkPythonProcessor] = []
     contexts: List[ExecutionContext] = []
-    exec_env, table_env, statement_set = flink_env.create_env()
+    table_env, statement_set = flink_env.create_env()
     for index in range(len(run_graph.nodes)):
         caller: FlinkPythonProcessor = serialization_utils.deserialize(run_graph.processor_bytes[index])
         processors.append(caller)
         node: AINode = run_graph.nodes[index]
         execution_context = ExecutionContext(config=node.node_config,
                                              job_execution_info=job_execution_info,
-                                             execution_env=exec_env,
                                              table_env=table_env,
                                              statement_set=statement_set)
         contexts.append(execution_context)
